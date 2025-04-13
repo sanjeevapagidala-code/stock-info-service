@@ -1,10 +1,14 @@
-FROM maven:3.8.2-jdk-8-slim AS build
-WORKDIR /home/app
-COPY . /home/app
-RUN mvn -f /home/app/pom.xml clean package
+# Use an official Java runtime as a parent image
+FROM amazoncorretto:21.0.4-alpine3.18
 
-FROM openjdk:17-jdk-alpine
-VOLUME /tmp
-EXPOSE 8000
-COPY --from=build /home/app/target/*.jar app.jar
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the JAR file into the container
+COPY target/trade-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose the port that the application will run on
+EXPOSE 8080
+
+# Run the JAR file
+ENTRYPOINT ["java", "-jar", "app.jar"]
