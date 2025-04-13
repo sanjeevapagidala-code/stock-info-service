@@ -19,7 +19,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'sanjeeva-docker-hub'
-        repository: 'sanjeeva603/trade-now'
+        repository: 'sanjeeva9603/trade-now'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: '$(tag)'
