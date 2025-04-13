@@ -12,3 +12,7 @@ EXPOSE 8080
 
 # Run the JAR file
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+#Build the project using Maven: mvn clean package
+#Build the Docker image:docker build -t trade-now-app .
+#Run the Docker container:docker run -p 8080:8080 trade-now-app
